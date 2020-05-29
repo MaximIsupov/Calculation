@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <title> Меню </title>
+        <script src="jquery-3.5.0.min.js"></script>
+        <script src="bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap-grid.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap.css">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+            <header class="container-fluid  mt-0">
+                <h1> Tea shop!</h1>
+            </header>
+            <div class="container" id="back">
+            <div class="row d-flex justify-content-between">
+
+              <div class="col-12 mb-1" id="newSum"> 
+                <h1> Товары, представленные в магазине: </h1>
+               </div>
+
+            <div class="col-4 " id="card">
+            <h2> <strong> Lipton Ice Tea </strong> </h2>
+            
+            <h5>- 100 Рублей / Пачка </h5>
+            <h5> Выбрать количество: </h5>
+            <input type=text id="ownPrice"> </input>
+            <p><input type="checkbox" id="check"> + Чайный набор - 250 рублей.
+            <p><input type="checkbox" id="check1"> + Фирменная кружка - 150 рублей.
+            <p><button onclick="addPurchase(0)"> Добавить в корзину </button></p>
+            <p><button onclick="deletePurchase(0)"> Удалить товар из корзины </button></p>
+            <h5 id="additionalservice"></h5>
+            <h5 id="additionalcup"></h5>
+            <h5 id="sum"></h5>
+            </div>
+
+            <div class="col-4 " id="card">
+            <h2><strong> Tess Pleasure </strong></h2> 
+            
+            <h5> - 240 Рублей / Пачка </h5>
+            <h5> Выбрать количество: </h5>
+            <input type=text id="ownPrice1"> </input>
+            <p><button onclick="addPurchase(1)"> Добавить в корзину </button></p>
+            <p><button onclick="deletePurchase(1)"> Удалить товар из корзины </button></p>
+            <h5 id="sum1"></h5>
+            </div>
+
+            <div class="col-4 " id="card">
+            <h2><strong> Greenfield </strong></h2> 
+            
+            <h5> - 125 Рублей / Пачка </h5>
+            <h5> Выбрать количество товара: </h5>
+            <input type=text id="ownPrice2"> </input>
+            <p><button onclick="addPurchase(2)"> Добавить в корзину </button></p>
+            <p><button onclick="deletePurchase(2)"> Удалить товар из корзины </button> </p>
+            <h5 id="sum2"></h5>
+            </div>
+
+            
+            
+            
+            </div>
+            <div class="row d-flex justify-content-center mt-1" id="newSum"> 
+              <h1 class="col-12"> Товары в корзине: </h1>
+              <div  class = "col-12 " id="purchases"> <h5> Пока что ничего нет... </h5></div>
+             </div>
+          </div>
+          <script>
+              let a=[];
+              a[0]=100;
+              a[1]=240;
+              a[2]=125;
+              let sum=[0,0,0];
+              let description=["Lipton Ice Tea", "Tess", "Greenfield"];
+              let k=[0,0,0];
+              let prom=[0,0,0];
+              let col=[0,0,0];
+              
+              function addPurchase(id){
+                for (let i=0; i < 3; i++){
+                  if (i==id){
+                      sum[i]+=prom[i];
+                      k[i]+=col[i];
+                      updateSum();
+                  }
+                }
+                console.log("Была нажата кнопка добавления в корзину!")
+              }
+
+              function deletePurchase(id){
+                for (let i=0; i < 3; i++){
+                  if (i==id){
+                    if( k[i]-col[i]>=0){
+                      sum[i]-=prom[i];
+                      k[i]-=col[i];
+                      updateSum();}
+                      else{
+                        sum[i]=0;
+                        k[i]=0;
+                        updateSum();
+                      }
+                  }
+                }
+                console.log("Была нажата кнопка удаления из корзины!")
+              }
+
+                function updateSum(){
+                  let b=document.getElementById("purchases");
+                  let content='';
+                  let summ=0;
+                  for (let i=0; i<3; i++){
+                  summ+=sum[i];
+                  if (sum[i]!=0){
+                    content+= "<h5> Чай <strong>" + description[i] + "</strong> в размере <strong>" + k[i] + "</strong> пачек. Всего: <strong>" + sum[i] + "</strong> рублей. </h5>";
+                    console.log(i);
+                  }}
+                  content+="<h5> Общая сумма товаров: <strong>" + summ + "</strong> рублей";
+                  b.innerHTML=content;
+                }
+
+              $(document).ready(function()
+              { 
+                
+                $('#ownPrice').change(function()
+                  { 
+                    let b=document.getElementById("ownPrice");
+                    let c=document.getElementById("sum");
+                    col [0] = Number(b.value);
+                    prom[0]=col[0]*a[0];
+                    c.innerHTML="На данный момент выбрано <strong>" + col[0] + "</strong> пачек товара на сумму <strong>" + prom[0] + "</strong> рублей.";
+                    b.value='';
+                    console.log("Изменено количество товара 0!");
+                  });   
+
+                  $('#ownPrice1').change(function()
+                  { 
+                    let b=document.getElementById("ownPrice1");
+                    let c=document.getElementById("sum1");
+                    col[1] = Number(b.value);
+                    prom[1]=col[1]*a[1];
+                    c.innerHTML= "На данный момент выбрано <strong>" + col[1] + "</strong> пачек товара на сумму <strong>" +prom[1] + "</strong> рублей.";
+                    b.value='';
+                    console.log("Изменено количество товара 1!");
+                  }); 
+                  
+                  $('#ownPrice2').change(function()
+                  { 
+                    let b=document.getElementById("ownPrice2");
+                    let c=document.getElementById("sum2");
+                    col[2] = Number(b.value);
+                    prom[2]=col[2]*a[2];
+                    c.innerHTML="На данный момент выбрано <strong>" + col[2] + "</strong> пачек товара на сумму <strong>"+ prom[2] + "</strong> рублей."
+                    b.value='';
+                    console.log("Изменено количество товара 2!");
+                  }); 
+
+                  $('#check').change(function()
+                  { 
+                    let b=document.getElementById("check");
+                    let c=document.getElementById("additionalservice");
+                    if (b.checked){
+                      sum[0]+=250;
+                      c.innerHTML="+ Чайный набор стоимостью 250 рублей.";
+                    }
+                    else{
+                      sum[0]-=250;
+                      c.innerHTML="";
+                    }
+                    updateSum();
+                    console.log("check");
+                  }); 
+                  $('#check1').change(function()
+                  { 
+                    let b=document.getElementById("check1");
+                    let c=document.getElementById("additionalcup");
+                    if (b.checked){
+                      sum[0]+=100;
+                      c.innerHTML="+ Фирменная кружка стоимостью 100 рублей.";
+                      console.log("checked");
+                    }
+                    else{
+                      sum[0]-=100;
+                      c.innerHTML="";
+                      console.log("unchecked");
+                    }
+                    updateSum();
+                    console.log("check");
+                  }); 
+              })
+          </script>
+
+        
+    </body>
+</html>

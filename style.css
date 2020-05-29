@@ -1,0 +1,65 @@
+body{
+    background-image:url(background.jpg);
+}
+
+header{
+    background-color:black;
+    color:white;
+    text-align:center; 
+}
+
+header h1{
+    padding:30px;
+    font-family:'Сomic Sans MS', cursive;
+    font-size:50px;
+}
+
+#card, #newSum
+{
+    padding:10px;
+    border-radius:10px;
+    border: 1px solid black;
+    background-color:#F8F8FF;
+}
+
+#newSum{
+    text-align:center;
+}
+
+
+
+img{
+    width:100%;
+    height:auto;
+    margin-top:10px;
+    margin-bottom:10px;
+    border-width:3px;
+    border-color:black; 
+}
+
+button{
+    background-color:black;;
+    color:white;
+    border-radius:5px;
+    border-width: 0px;
+    padding:5px;
+    font-weight:bold;
+}
+
+#ownPrice, #ownPrice1, #ownPrice2{
+    margin-bottom:10px;
+}
+
+#purchases{
+    text-align:left;
+}
+
+#purchases h5
+{
+    background-color:white;
+    border: 1px solid black;
+    border-radius:10px;
+    padding:10px;
+    font-size:25px;
+}
+
